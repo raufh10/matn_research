@@ -1,3 +1,4 @@
+import os
 from agents import Agent, handoff
 from src.agent.tools import load_sharh_tools
 from src.agent.guardrails import waraqat_relevance_guardrail
@@ -9,14 +10,14 @@ scholar_agents = []
 # 1. SPECIALISTS: 1 Agent Per Waraqat Tool
 # ---------------------------------------------------------------------
 for tool in all_tools:
-  volume_name = tool.__name__.replace("read_", "")
+  volume_name = tool.name.replace("read_", "")
   formatted_volume = volume_name.replace("_", " ").title()
 
   volume_scholar = Agent(
-    name=f"{formatted_volume} Expert",
+    name=f"Waraqat_{volume_name.split('_')[-1]}_Expert",
     handoff_description=f"Expert for text, definitions, or commentaries in {formatted_volume}.",
     instructions=(
-      f"You are a scholar for {formatted_volume}. Always call `{tool.__name__}` "
+      f"You are a scholar for {formatted_volume}. Always call `{tool.name}` "
       "first to read the text before answering. Provide deep, text-based explanations."
     ),
     tools=[tool]
@@ -24,11 +25,12 @@ for tool in all_tools:
 
   scholar_agents.append(volume_scholar)
 
+
 # ---------------------------------------------------------------------
 # 2. SPECIALIST: Administrative Bot Assistant
 # ---------------------------------------------------------------------
 admin_assistant_agent = Agent(
-  name="Waraqat Bot Admin",
+  name="Waraqat_Bot_Admin",
   handoff_description="Handles greetings, usage guides, help requests, and general system overviews.",
   instructions=(
     "Help the user with commands, available files, and navigation. Forward "
@@ -42,7 +44,7 @@ admin_assistant_agent = Agent(
 all_handoff_targets = [handoff(s) for s in scholar_agents] + [handoff(admin_assistant_agent)]
 
 triage_agent = Agent(
-  name="Waraqat Layout Router",
+  name="Waraqat_Layout_Router",
   instructions=(
     "Route requests based on handoff descriptions:\n"
     "- Text/academic questions go to the specific volume expert.\n"
@@ -51,3 +53,4 @@ triage_agent = Agent(
   handoffs=all_handoff_targets,
   input_guardrails=[waraqat_relevance_guardrail]
 )
+

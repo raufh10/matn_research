@@ -401,6 +401,7 @@ name = "matn-research"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "annotated-doc" },
     { name = "fastapi" },
     { name = "httpx" },
     { name = "openai-agents" },
@@ -416,12 +417,13 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "annotated-doc", specifier = ">=0.0.4" },
     { name = "fastapi", specifier = ">=0.136.3" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "openai-agents", specifier = ">=0.17.4" },
     { name = "pydantic", specifier = ">=2.13.4" },
     { name = "telegramify-markdown", specifier = ">=1.1.5" },
-    { name = "uvicorn", specifier = ">=0.48.0" },
+    { name = "uvicorn", specifier = ">=0.48" },
 ]
 
 [package.metadata.requires-dev]
