@@ -10,11 +10,11 @@ from agents import (
 
 class WaraqatEvaluationOutput(BaseModel):
   is_relevant: bool = Field(
-    ..., 
-    description="True if relevant to Matn Al-Waraqat, Usul al-Fiqh, or its Sharh commentaries."
+    ...,
+    description="True if relevant to Matn Al-Waraqat or its Sharh commentaries."
   )
   reasoning: str = Field(
-    ..., 
+    ...,
     description="Brief technical explanation of relevance check."
   )
 
