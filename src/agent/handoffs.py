@@ -14,12 +14,12 @@ for tool in all_tools:
   formatted_volume = volume_name.replace("_", " ").title()
 
   volume_scholar = Agent(
-    name=f"Waraqat_{volume_name.split('_')[-1]}_Expert",
+    name=f"Waraqat_Chapter_{volume_name.split('_')[-1]}_Expert",
     handoff_description=(
-      f"Expert for text, definitions, or commentaries in {formatted_volume}."
+      f"Expert for text, definitions, or commentaries in Chapter {formatted_volume}."
     ),
     instructions=(
-      f"You are a scholar specializing in {formatted_volume}. "
+      f"You are a scholar specializing in Al Waraqat Chapter {formatted_volume}. "
       f"Always call `{tool.name}` first to read the source text before answering. "
       "Provide deep, text-based explanations grounded in the retrieved content. "
       "Do not hand off or escalate — answer fully and conclude your response."
@@ -59,7 +59,7 @@ triage_agent = Agent(
     "Routing rules:\n"
     "- Academic, textual, or definition questions → hand off to the matching volume expert.\n"
     "- Greetings, help requests, system questions, or feature overviews → hand off to Waraqat_Bot_Admin.\n"
-    "- If the volume is unclear, ask the user one clarifying question before routing.\n"
+    "- If the volume is unclear, route to Waraqat_Bot_Admin.\n"
     "- Never answer academic questions yourself — always delegate to a specialist."
   ),
   handoffs=all_handoff_targets,

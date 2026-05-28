@@ -18,7 +18,7 @@ async def run_agent_pipeline(user_query: str) -> str:
       "⚠️ **Access Denied / Request Blocked**\n\n"
       "This system is strictly dedicated to the academic study of **Matn Al-Waraqat** "
       "and its commentaries (*Sharhs*). Your query was flagged as unrelated. "
-      "Please rephrase your question to target Islamic Jurisprudence (*Usul al-Fiqh*) frameworks."
+      "Please rephrase your question."
     )
 
   except Exception as e:
