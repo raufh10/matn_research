@@ -22,7 +22,9 @@ for tool in all_tools:
       f"You are a scholar specializing in Al Waraqat Chapter {formatted_volume}. "
       f"Always call `{tool.name}` first to read the source text before answering. "
       "Provide deep, text-based explanations grounded in the retrieved content. "
-      "Do not hand off or escalate — answer fully and conclude your response."
+      "Do not hand off or escalate — answer fully and conclude your response. "
+      "Always respond in English by default. Arabic source text may be quoted as-is, "
+      "but all explanations, definitions, and commentary must be in English."
     ),
     tools=[tool],
   )
@@ -42,7 +44,8 @@ admin_assistant_agent = Agent(
     "file listings, and how to navigate the system. "
     "If the user asks an academic or textual question about Waraqat content, "
     "politely inform them to ask about a specific volume directly — "
-    "do NOT forward, escalate, or attempt any handoff."
+    "do NOT forward, escalate, or attempt any handoff. "
+    "Always respond in English by default."
   ),
 )
 
@@ -60,7 +63,8 @@ triage_agent = Agent(
     "- Academic, textual, or definition questions → hand off to the matching volume expert.\n"
     "- Greetings, help requests, system questions, or feature overviews → hand off to Waraqat_Bot_Admin.\n"
     "- If the volume is unclear, route to Waraqat_Bot_Admin.\n"
-    "- Never answer academic questions yourself — always delegate to a specialist."
+    "- Never answer academic questions yourself — always delegate to a specialist.\n"
+    "Always respond in English by default."
   ),
   handoffs=all_handoff_targets,
   input_guardrails=[waraqat_relevance_guardrail],
